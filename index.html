@@ -183,6 +183,15 @@
     .r .w input{border-bottom:1px solid #999}
     .r.hv,.band.s{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
+  .cnote{padding:6px 9px 8px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--rule);line-height:1.35}
+  .seg{display:flex;border:1px solid var(--ink)}
+  .seg button{font-family:"PT Sans Narrow","PT Sans",sans-serif;font-weight:700;font-size:15px;text-transform:uppercase;
+    letter-spacing:.05em;background:transparent;color:var(--ink);border:0;height:34px;padding:0 13px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent}
+  .seg button.on{background:var(--ink);color:#fff}
+  @media (max-width:700px){ .b.pr{display:none} }
+  .mode{display:none}
+  .mode.on{display:block}
 </style>
 
 <div class="sheet">
@@ -190,6 +199,7 @@
   <div class="top">
     <h1>Дневник за залата</h1>
     <div class="bar">
+      <div class="seg" role="tablist"><button data-m="2" role="tab">2 дни</button><button data-m="3" role="tab">3 дни</button></div>
       <div class="wknav">
         <button id="prev" aria-label="Предишна седмица">◀</button>
         <span class="lab" id="wklab">Седмица 1</span>
@@ -198,11 +208,11 @@
       <button class="b" id="bCarry">↧ Миналата</button>
       <button class="b" id="bHist">История</button>
       <button class="b" id="bData">Данни</button>
-      <button class="b" onclick="window.print()">Печат</button>
+      <button class="b pr" onclick="window.print()">Печат</button>
     </div>
   </div>
 
-  <p class="hint">
+  <p class="hint"><b id="sched"></b> 
     Тапни упражнението → отваря видеото. Тапни <b>✎</b> → смени връзката със своя. Има го при <b>всяко</b> упражнение, включително разгрявката.
     <span class="sw">Жълтото е референтен старт</span> — първата тренировка е калибриране.
     Под всяко поле се показва тежестта от миналата седмица.
@@ -230,291 +240,121 @@
       <li data-lk="w1"><b>1</b><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=1cs3SKwQZpM">Котка-камила</a> <span>· 8 бавни</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
       <li data-lk="w2"><b>2</b><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=k4uxjuTzj5M">Глутеус мост</a> <span>· 15</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
       <li data-lk="w3"><b>3</b><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/CN2VqkSZhFc">Dead bug</a> <span>· 8/стр.</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
-      <li data-lk="w4"><b>4</b><a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=kneeling+hip+flexor+stretch+posterior+pelvic+tilt">Илиопсоас</a> <span>· 30″/стр.</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
+      <li data-lk="w4"><b>4</b><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=KiTGo4L4Bgg">Илиопсоас</a> <span>· 30″/стр.</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
       <li data-lk="w5"><b>5</b><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=UB_n4DxOTCo">Плъзгане по стена</a> <span>· 10 бавни</span><button class="ed" title="Смени видеото">✎</button><div class="er mini"><input type="url" placeholder="https://..."><button>OK</button></div></li>
       <li><b>6</b>Загряващи серии <span>· само за №1 · 8×50% → 3×75%</span></li>
     </ul>
   </section>
 
+  <div class="mode" id="m2">
   <div class="grid2">
-
-    <!-- ================= А1 ================= -->
-    <section class="card">
-      <header><span class="tag">А1</span><p>Рамене · Гърди · Трицепс · Квадрицепс</p></header>
+    <section class="card"><header><span class="tag">А1</span><p>Рамене · Гърди · Крака</p></header>
       <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
-
       <div class="band s"><span>Сила</span><em>без бързане</em></div>
-      <div class="r hv" data-k="a1">
-        <span class="n">1</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса, дъмбели</a>
-          <i class="st">старт ~8-10 кг</i>
-        </div>
-        <div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r" data-k="a1c" style="border-left-color:var(--heavy);background:#fdf6f7">
-        <span class="n">↳</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=standing+calf+raise+proper+form+gastrocnemius">Прасец, прав крак</a>
-          <i class="st">старт: собствено тегло</i>
-          <i class="alt">в почивките · не до отказ</i>
-        </div>
-        <div class="sch"><b>3 × 12-15</b><i>—</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
+      <div class="r hv" data-k="a1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса, дъмбели</a><i class="st">старт ~15 кг · 2-3 повторения в резерв</i></div><div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
       <div class="band v"><span>Обем</span></div>
-      <div class="r" data-k="a2">
-        <span class="n">2</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8iPEnn-ltC8">Наклонена преса 30°</a>
-          <i class="st">старт ~12-14 кг</i>
-        </div>
-        <div class="sch"><b>4 × 6-8</b><i>90″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="a3">
-        <span class="n">3a</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=cable+crossover+chest+fly+proper+form">Кросоувър / pec-deck</a>
-          <i class="st">старт ~5-7 кг/страна · 8 серии гърди седмично</i>
-        </div>
-        <div class="sch"><b>4 × 10-12</b><i>—</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="a4a">
-        <span class="n">3b</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a>
-          <i class="st">старт ~4-5 кг · нарочно малко</i>
-        </div>
-        <div class="sch"><b>4 × 12-15</b><i>60″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="a4b">
-        <span class="n">4a</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=X-iV-cG8cYs">Трицепс над глава</a>
-          <i class="st">старт ~10-12 кг (един дъмбел)</i>
-        </div>
-        <div class="sch"><b>3 × 10-12</b><i>60″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="a5">
-        <span class="n">4b</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K5n2vg3oZa4">Лег прес</a>
-          <i class="st">старт ~40-50 кг върху шейната</i>
-        </div>
-        <div class="sch"><b>3 × 10-12</b><i>60″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="a2"><span class="n">2</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8iPEnn-ltC8">Наклонена преса, неутрален хват</a><i class="st">старт ~15 кг · лактите до нивото на торса</i></div><div class="sch"><b>4 × 6-8</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="a3"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=50BDseX8lTY">Кросоувър / pec-deck</a><i class="st">старт ~5-7 кг/страна</i></div><div class="sch"><b>4 × 10-12</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="a4a"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a><i class="st">старт ~8-10 кг · провери формата</i></div><div class="sch"><b>4 × 12-15</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="a5"><span class="n">4a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K5n2vg3oZa4">Лег прес</a><i class="st">старт ~100 кг върху шейната</i></div><div class="sch"><b>3 × 10-12</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="a5c" data-l="x_lpc"><span class="n">4b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sluiSitVePs">Прасец на лег преса</a><i class="st">старт ~60-80 кг</i><i class="alt">веднага след лег преса · на същата машина · пълен обхват</i></div><div class="sch"><b>3 × 12-15</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
     </section>
-
-    <!-- ================= Б1 ================= -->
-    <section class="card">
-      <header><span class="tag">Б1</span><p>Гръб · Задни рамене · Бицепс · Задна верига</p></header>
+    <section class="card"><header><span class="tag">Б1</span><p>Гръб · Гърди · Задни рамене · Ръце</p></header>
       <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
-
       <div class="band s"><span>Сила</span><em>без бързане</em></div>
-      <div class="r hv" data-k="b1">
-        <span class="n">1</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=jeff+nippard+pull+ups+proper+form+lats">Набирания / лат машина</a>
-          <i class="st">собств. тегло · или лат ~40-45 кг</i>
-        </div>
-        <div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r" data-k="b1c" style="border-left-color:var(--heavy);background:#fdf6f7">
-        <span class="n">↳</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=seated+calf+raise+proper+form+soleus">Pallof press</a>
-          <i class="st">старт ~10-15 кг · корем, без флексия</i>
-          <i class="alt">в почивките · не до отказ</i>
-        </div>
-        <div class="sch"><b>3 × 10/стр.</b><i>—</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
+      <div class="r hv" data-k="b1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Hdc7Mw6BIEE">Набирания / лат машина</a><i class="st">собств. тегло · или лат ~45-50 кг</i></div><div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="b1c" style="border-left-color:var(--heavy);background:#fdf6f7"><span class="n">↳</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SsQWYNxlYsQ">Pallof press</a><i class="st">старт ~10-15 кг</i><i class="alt">в почивките · корем без флексия</i></div><div class="sch"><b>3 × 10/стр.</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
       <div class="band v"><span>Обем</span></div>
-      <div class="r" data-k="b2">
-        <span class="n">2</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jLvqKgW-_G8">Гребане с опора</a>
-          <i class="alt">chest-supported row</i>
-          <i class="st">старт ~12-14 кг</i>
-        </div>
-        <div class="sch"><b>4 × 8</b><i>90″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="b3">
-        <span class="n">3a</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=duHQk2PxNos">Пуловер / едностр. лат</a>
-          <i class="st">старт ~15-20 кг</i>
-        </div>
-        <div class="sch"><b>3 × 12</b><i>—</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="b4a">
-        <span class="n">3b</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eQaSpG7aMYQ">Face pull</a>
-          <i class="st">старт ~10-12 кг</i>
-        </div>
-        <div class="sch"><b>3 × 15</b><i>60″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="b4b">
-        <span class="n">4a</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=incline+dumbbell+curl+proper+form+biceps">Бицепс, наклонена пейка</a>
-          <i class="st">старт ~6-8 кг</i>
-        </div>
-        <div class="sch"><b>3 × 10-12</b><i>60″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r sup" data-k="b5a">
-        <span class="n">4b</span>
-        <div class="ex">
-          <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=9eTO67ydcrY">Глутеус мост на пода, дъмбел</a>
-          <i class="st">старт ~15-20 кг · подът винаги е свободен</i>
-          <i class="alt">алт: качване на висок степер · glute drive машина</i>
-        </div>
-        <div class="sch"><b>3 × 10</b><i>—</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-
-      <div class="r" data-k="b5b">
-        <span class="n">5</span>
-        <div class="ex">
-          <a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=seated+leg+curl+proper+form+hamstring">Сгъване за бедра</a>
-          <i class="st">старт ~20-25 кг</i>
-        </div>
-        <div class="sch"><b>2 × 12</b><i>90″</i></div>
-        <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-        <button class="ed" title="Смени видеото">✎</button>
-      </div>
-      <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="b2"><span class="n">2a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jLvqKgW-_G8">Гребане с опора</a><i class="st">старт ~14-16 кг</i><i class="alt">chest-supported row</i></div><div class="sch"><b>4 × 8</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="b2c" data-l="x_cp"><span class="n">2b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4YpxZXFADmc">Машинна преса за гърди</a><i class="st">старт: лека, калибрирай · дръжките на средата на гърдите</i><i class="alt">спираш преди рамото да се обади</i></div><div class="sch"><b>3 × 8-10</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="b3u" data-l="x_sal"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eM162KNncD8">Едностранна лат тяга / пуловер</a><i class="st">според това кое е свободно</i><i class="alt">е = едностранна (кг на страна) · п = пуловер · <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=duHQk2PxNos">видео за пуловер</a></i></div><div class="sch"><b>2 × 12</b><i>—</i></div><div class="w"><input inputmode="text" placeholder="е15"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="b4r" data-l="x_rpd"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=dC7jhEk-29A">Обратен pec-deck / разперване на кабел</a><i class="st">според това кое е свободно</i><i class="alt">д = pec-deck · к = кабел · <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FcCNakXguzc">видео за кабела</a></i></div><div class="sch"><b>3 × 15</b><i>60″</i></div><div class="w"><input inputmode="text" placeholder="д20"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="b4b"><span class="n">4a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=e3zNNfjJszA">Бицепс, наклонена пейка</a><i class="st">старт ~8-10 кг</i></div><div class="sch"><b>3 × 10-12</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="a4b"><span class="n">4b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=X-iV-cG8cYs">Трицепс над глава, седнал</a><i class="st">старт ~12-15 кг (един дъмбел)</i></div><div class="sch"><b>3 × 10-12</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="b5b"><span class="n">5</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Z5pRnXaCjpM">Сгъване за бедра</a><i class="st">старт ~25-30 кг</i></div><div class="sch"><b>2 × 12</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
     </section>
   </div>
-
-  <!-- ================= В ================= -->
   <section class="fallback">
     <header><span class="tag">В</span><p>Само една тренировка тази седмица · пълно тяло</p></header>
     <div class="grid2" style="gap:0;margin:0">
       <div style="border-right:1px solid var(--rule)">
-        <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
-        <div class="band s"><span>Сила</span><em>без бързане</em></div>
-        <div class="r hv" data-k="v1">
-          <span class="n">1</span>
-          <div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса</a><i class="st">старт ~8-10 кг</i></div>
-          <div class="sch"><b>4 × 4-6</b><i>2 мин</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-        <div class="r" data-k="v1c" style="border-left-color:var(--heavy);background:#fdf6f7">
-          <span class="n">↳</span>
-          <div class="ex"><a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=standing+calf+raise+proper+form+gastrocnemius">Прасец</a><i class="st">старт: собствено тегло</i><i class="alt">в почивките</i></div>
-          <div class="sch"><b>3 × 15</b><i>—</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-        <div class="band v"><span>Обем</span></div>
-        <div class="r" data-k="v2">
-          <span class="n">2</span>
-          <div class="ex"><a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=jeff+nippard+pull+ups+proper+form+lats">Набирания / лат</a><i class="st">собств. тегло · лат ~40-45 кг</i></div>
-          <div class="sch"><b>3 × 6</b><i>90″</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
+      <div class="band s"><span>Сила</span><em>без бързане</em></div>
+      <div class="r hv" data-k="v1" data-l="a1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса</a><i class="st">старт ~15 кг</i></div><div class="sch"><b>4 × 4-6</b><i>2 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="band v"><span>Обем</span></div>
+      <div class="r" data-k="v2" data-l="b1"><span class="n">2</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Hdc7Mw6BIEE">Набирания / лат</a><i class="st">собств. тегло · лат ~45-50 кг</i></div><div class="sch"><b>3 × 6</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
       </div>
       <div>
-        <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
-        <div class="r sup" data-k="v3a">
-          <span class="n">3a</span>
-          <div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8iPEnn-ltC8">Наклонена преса</a><i class="st">старт ~12-14 кг</i></div>
-          <div class="sch"><b>3 × 8</b><i>—</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-        <div class="r sup" data-k="v3b">
-          <span class="n">3b</span>
-          <div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jLvqKgW-_G8">Гребане с опора</a><i class="st">старт ~12-14 кг</i></div>
-          <div class="sch"><b>3 × 8</b><i>60″</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-        <div class="r sup" data-k="v4a">
-          <span class="n">4a</span>
-          <div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a><i class="st">старт ~4-5 кг</i></div>
-          <div class="sch"><b>2 × 15</b><i>—</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
-        <div class="r sup" data-k="v4b">
-          <span class="n">4b</span>
-          <div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K5n2vg3oZa4">Лег прес</a><i class="st">старт ~40-50 кг</i></div>
-          <div class="sch"><b>2 × 12</b><i>60″</i></div>
-          <div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div>
-          <button class="ed" title="Смени видеото">✎</button>
-        </div>
-        <div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
+      <div class="r sup" data-k="v3a" data-l="a2"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8iPEnn-ltC8">Наклонена преса, неутрален хват</a><i class="st">старт ~15 кг</i></div><div class="sch"><b>3 × 8</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="v3b" data-l="b2"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jLvqKgW-_G8">Гребане с опора</a><i class="st">старт ~14-16 кг</i></div><div class="sch"><b>3 × 8</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="v4a" data-l="a4a"><span class="n">4a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a><i class="st">старт ~8-10 кг</i></div><div class="sch"><b>2 × 15</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="v4b" data-l="a5"><span class="n">4b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K5n2vg3oZa4">Лег прес</a><i class="st">старт ~100 кг</i></div><div class="sch"><b>2 × 12</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="v4c" data-l="x_lpc"><span class="n">4c</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sluiSitVePs">Прасец на лег преса</a><i class="st">старт ~60-80 кг</i><i class="alt">на същата машина</i></div><div class="sch"><b>2 × 15</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
       </div>
     </div>
   </section>
+    <section class="card" style="margin-bottom:var(--gap)"><header><span class="tag">К</span><p>Кардио · ср + нед · отделно</p></header>
+      <div class="hd"><span></span><span>Кардио</span><span>Цел</span><span>Напр.</span><span></span></div>
+      <div class="r" data-k="j1" data-l="c1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ii71nAaRc_8">Наклон на пътека</a><i class="alt">прав торс · без парапети · при натегнати прасци: 10-12%</i></div><div class="sch"><b>20 мин</b><i>15% · 6 км/ч</i></div><div class="w"><input placeholder="мин"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="j2" data-l="c2"><span class="n">2</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8Y7yTrSJwWU">Стълби, машина</a><i class="alt">прав торс · без парапети · цяло стъпало</i></div><div class="sch"><b>20 мин</b><i>100 етажа</i></div><div class="w"><input placeholder="етажи"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="cnote">Ср: наклон (ден след А1 — по-щадящо за квадрицепса). Нед: стълби (краката са свежи, 48 ч до А1). Не в чт — деня преди Б1. Гребане: не — тазов шарнир при умора, а лат и хват трябват на Б1. След края 2-3 мин ходене на равно.</div>
+    </section>
+  </div>
+
+  <div class="mode" id="m3">
+  <div class="grid2">
+    <section class="card"><header><span class="tag">Т1</span><p>Гръб + гърди · пн</p></header>
+      <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
+      <div class="band s"><span>Сила</span><em>без бързане</em></div>
+      <div class="r hv" data-k="p1" data-l="b1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Hdc7Mw6BIEE">Набирания / лат машина</a><i class="st">собств. тегло · или лат ~45-50 кг</i></div><div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="p1c" data-l="b1c" style="border-left-color:var(--heavy);background:#fdf6f7"><span class="n">↳</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SsQWYNxlYsQ">Pallof press</a><i class="st">старт ~10-15 кг</i><i class="alt">в почивките · корем без флексия</i></div><div class="sch"><b>3 × 10/стр.</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="band v"><span>Обем</span></div>
+      <div class="r sup" data-k="p2" data-l="b2"><span class="n">2a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=jLvqKgW-_G8">Гребане с опора</a><i class="st">старт ~14-16 кг</i><i class="alt">chest-supported row</i></div><div class="sch"><b>4 × 8-10</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="p3m" data-l="x_cp"><span class="n">2b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4YpxZXFADmc">Машинна преса за гърди</a><i class="st">старт: лека, калибрирай · дръжките на средата на гърдите</i></div><div class="sch"><b>4 × 8-10</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="p4r" data-l="x_rpd"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=dC7jhEk-29A">Обратен pec-deck / разперване на кабел</a><i class="st">според това кое е свободно</i><i class="alt">д = pec-deck · к = кабел · <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FcCNakXguzc">видео за кабела</a></i></div><div class="sch"><b>3 × 15</b><i>—</i></div><div class="w"><input inputmode="text" placeholder="д20"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="p5" data-l="b4b"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=e3zNNfjJszA">Бицепс, наклонена пейка</a><i class="st">старт ~8-10 кг</i></div><div class="sch"><b>3 × 10-12</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="p6u" data-l="x_sal"><span class="n">4</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eM162KNncD8">Едностранна лат тяга / пуловер</a><i class="st">според това кое е свободно</i><i class="alt">е = едностранна (кг на страна) · п = пуловер · <a class="yt" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=duHQk2PxNos">видео за пуловер</a></i></div><div class="sch"><b>2 × 12</b><i>60″</i></div><div class="w"><input inputmode="text" placeholder="е15"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+    </section>
+    <section class="card"><header><span class="tag">Т2</span><p>Рамене + гърди + седалище · ср</p></header>
+      <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
+      <div class="band s"><span>Сила</span><em>без бързане</em></div>
+      <div class="r hv" data-k="q1" data-l="a1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса, дъмбели</a><i class="st">старт ~15 кг · 2-3 повторения в резерв</i></div><div class="sch"><b>4 × 4-6</b><i>2-3 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="band v"><span>Обем</span></div>
+      <div class="r" data-k="q2" data-l="a2"><span class="n">2</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8iPEnn-ltC8">Наклонена преса, неутрален хват</a><i class="st">старт ~15 кг · лактите до нивото на торса</i></div><div class="sch"><b>4 × 6-8</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="q3" data-l="a4a"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a><i class="st">старт ~8-10 кг · провери формата</i></div><div class="sch"><b>4 × 12-15</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="q4" data-l="a3"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=50BDseX8lTY">Кросоувър / pec-deck</a><i class="st">старт ~5-7 кг/страна</i></div><div class="sch"><b>3 × 10-12</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="q5" data-l="a4b"><span class="n">4</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=X-iV-cG8cYs">Трицепс над глава, седнал</a><i class="st">старт ~12-15 кг (един дъмбел)</i></div><div class="sch"><b>3 × 10-12</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="q7g" data-l="x_slht"><span class="n">5</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=9eTO67ydcrY">Едностранен hip thrust с дъмбел</a><i class="st">старт: собствено тегло · дъмбел след 2-3 седмици</i><i class="alt">раменете на пейката · спираш на паралел, без извиване в кръста</i></div><div class="sch"><b>3 × 10/крак</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+    </section>
+  </div>
+  <div class="grid2">
+    <section class="card"><header><span class="tag">Т3</span><p>Гръб + рамене + крака · пт</p></header>
+      <div class="hd"><span></span><span>Упражнение</span><span>С × П</span><span>кг</span><span></span></div>
+      <div class="band s"><span>Сила</span><em>без бързане</em></div>
+      <div class="r hv" data-k="r1" data-l="n1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4P3-TXbH4tw">Лат машина, неутрален хват</a><i class="st">старт ~45-50 кг</i></div><div class="sch"><b>3 × 6-8</b><i>2 мин</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="band v"><span>Обем</span></div>
+      <div class="r sup" data-k="r2" data-l="n2"><span class="n">2a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=EU7bOadUsNI">Гребане на кабел, изправен</a><i class="st">старт ~35-40 кг · без люлеене</i></div><div class="sch"><b>3 × 10</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="r3" data-l="a1"><span class="n">2b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=21lYP86dHW4">Раменна преса, дъмбели</a><i class="st">старт ~12-14 кг</i></div><div class="sch"><b>3 × 8-10</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="r4" data-l="a5"><span class="n">3a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=K5n2vg3oZa4">Лег прес</a><i class="st">старт ~100 кг върху шейната</i></div><div class="sch"><b>3 × 8-10</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="r4c" data-l="x_lpc"><span class="n">3b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sluiSitVePs">Прасец на лег преса</a><i class="st">старт ~60-80 кг</i><i class="alt">веднага след лег преса · на същата машина · пълен обхват</i></div><div class="sch"><b>3 × 12-15</b><i>90″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="r5" data-l="b5b"><span class="n">4a</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Z5pRnXaCjpM">Сгъване за бедра</a><i class="st">старт ~25-30 кг</i></div><div class="sch"><b>3 × 12</b><i>—</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r sup" data-k="r4l" data-l="a4a"><span class="n">4b</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/shorts/NZsldrqqca8">Странични повдигания</a><i class="st">старт ~8-10 кг</i></div><div class="sch"><b>3 × 12-15</b><i>60″</i></div><div class="w"><input inputmode="decimal" placeholder="кг"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+    </section>
+    <section class="card"><header><span class="tag">К</span><p>Кардио · вт + чт · отделно</p></header>
+      <div class="hd"><span></span><span>Кардио</span><span>Цел</span><span>Напр.</span><span></span></div>
+      <div class="r" data-k="k1" data-l="c1"><span class="n">1</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ii71nAaRc_8">Наклон на пътека</a><i class="alt">прав торс · без парапети · при натегнати прасци: 10-12%</i></div><div class="sch"><b>20 мин</b><i>15% · 6 км/ч</i></div><div class="w"><input placeholder="мин"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="r" data-k="k2" data-l="c2"><span class="n">2</span><div class="ex"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=8Y7yTrSJwWU">Стълби, машина</a><i class="alt">прав торс · без парапети · цяло стъпало</i></div><div class="sch"><b>20 мин</b><i>100 етажа</i></div><div class="w"><input placeholder="етажи"><i class="prev"></i></div><button class="ed" title="Смени видеото">✎</button></div><div class="er"><input type="url" placeholder="https://..."><button>OK</button></div>
+      <div class="cnote">Вт: стълби — краката са свежи (Т1 е без крака). Чт: наклон — утре е Т3 с лег преса, стълбите ще уморят краката. И двете са в деня преди тренировка: умерено темпо, да можеш да говориш. Гребане: не — тазов шарнир при умора, а лат и хват трябват на Т1 и Т3. След края 2-3 мин ходене на равно.</div>
+    </section>
+  </div>
+  </div>
 
   <div class="daily">
     <b>Всеки ден · 5 мин · McGill Big 3</b>
     <span data-lk="d1">Котка-камила 8 · <a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=FmZwkgg7pqU">коремно повдигане · страничен планк · bird dog</a><button class="ed" title="Смени видеото">✎</button></span>
     — задържания по 10″ в схема 5 → 4 → 3.
-    Плюс <span data-lk="d2"><a class="yt srch nm" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=mckenzie+press+up+extension+centralization">McKenzie разгъване</a><button class="ed" title="Смени видеото">✎</button></span> 10 бавни сутрин.
+    Плюс <span data-lk="d2"><a class="yt nm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kFZ8-rMItKk">McKenzie разгъване</a><button class="ed" title="Смени видеото">✎</button></span> 10 бавни сутрин.
     <div class="er mini" data-for="d1"><input type="url" placeholder="https://..."><button>OK</button></div>
     <div class="er mini" data-for="d2"><input type="url" placeholder="https://..."><button>OK</button></div>
   </div>
@@ -530,151 +370,166 @@
 
 <script>
 (function(){
-  var K_W = 'gymlog:weights', K_L = 'gymlog:links';
-  var store = null, week = 1;
-  var data = { w:{}, l:{} };            // w: {"1":{key:val}}, l:{key:url}
-  var rows = Array.prototype.slice.call(document.querySelectorAll('.r[data-k]'));
-  var lab  = document.getElementById('wklab');
+  var K = { w2:'gymlog:weights', w3:'gymlog3:weights', l:'gymlog:links', ui:'gymlog:ui' };
+  var SCHED = { '2':'Вт А1 · Пт Б1 · Кардио Ср + Нед.', '3':'Пн Т1 · Ср Т2 · Пт Т3 · Кардио Вт + Чт.' };
+  var store = null, sm = 'memory';
+  var data = { w2:{}, w3:{}, l:{} };
+  var ui = { m:'2', wk2:1, wk3:1 };
+  var lab = document.getElementById('wklab');
+  function rowsOf(m){ return Array.prototype.slice.call(document.querySelectorAll('#m' + m + ' .r[data-k]')); }
+  var R = { '2':rowsOf('2'), '3':rowsOf('3') };
+  function W(m){ return data['w' + (m || ui.m)]; }
+  function wk(m){ return ui['wk' + (m || ui.m)]; }
 
-  /* ---------- storage с тих фолбек ---------- */
-  var mode = 'memory';
+  /* ---------- съхранение с тих резерв ---------- */
   function probe(){
-    try{
-      if(window.storage && typeof window.storage.get === 'function'){ store = window.storage; mode = 'host'; return; }
-    }catch(e){}
-    try{
-      window.localStorage.setItem('gymlog:probe','1');
-      window.localStorage.removeItem('gymlog:probe');
-      mode = 'local';
-    }catch(e){ mode = 'memory'; }
+    try{ if(window.storage && typeof window.storage.get === 'function'){ store = window.storage; sm = 'host'; return; } }catch(e){}
+    try{ localStorage.setItem('gymlog:probe','1'); localStorage.removeItem('gymlog:probe'); sm = 'local'; }catch(e){ sm = 'memory'; }
   }
-  async function pull(){
-    if(mode === 'host'){
-      try{ var a = await store.get(K_W); if(a && a.value) data.w = JSON.parse(a.value); }catch(e){}
-      try{ var b = await store.get(K_L); if(b && b.value) data.l = JSON.parse(b.value); }catch(e){}
-    } else if(mode === 'local'){
-      try{ var x = localStorage.getItem(K_W); if(x) data.w = JSON.parse(x); }catch(e){}
-      try{ var y = localStorage.getItem(K_L); if(y) data.l = JSON.parse(y); }catch(e){}
-    }
+  async function readKey(k){
+    try{
+      if(sm === 'host'){ var r = await store.get(k); return r && r.value ? JSON.parse(r.value) : null; }
+      if(sm === 'local'){ var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; }
+    }catch(e){}
+    return null;
   }
   function writeKey(k, v){
-    if(mode === 'host'){ try{ store.set(k, v); }catch(e){} }
-    else if(mode === 'local'){ try{ localStorage.setItem(k, v); }catch(e){} }
+    try{
+      if(sm === 'host'){ store.set(k, v); }
+      else if(sm === 'local'){ localStorage.setItem(k, v); }
+    }catch(e){}
   }
-  var t1;
-  function pushW(){
-    clearTimeout(t1);
-    t1 = setTimeout(function(){ writeKey(K_W, JSON.stringify(data.w)); }, 350);
+  async function pull(){
+    data.w2 = (await readKey(K.w2)) || {};
+    data.w3 = (await readKey(K.w3)) || {};
+    data.l  = (await readKey(K.l))  || {};
+    var u = await readKey(K.ui);
+    if(u){ ui.m = (u.m === '3') ? '3' : '2'; ui.wk2 = +u.wk2 || 1; ui.wk3 = +u.wk3 || 1; }
   }
-  function pushL(){ writeKey(K_L, JSON.stringify(data.l)); }
+  var tw = {};
+  function pushW(m){
+    clearTimeout(tw[m]);
+    tw[m] = setTimeout(function(){ writeKey(K['w' + m], JSON.stringify(data['w' + m])); }, 350);
+  }
+  function pushL(){ writeKey(K.l, JSON.stringify(data.l)); }
+  function pushUI(){ writeKey(K.ui, JSON.stringify(ui)); }
 
   /* ---------- рендер ---------- */
   function render(){
-    lab.textContent = 'Седмица ' + week;
-    var cur = data.w[week] || {}, prv = data.w[week-1] || {};
-    rows.forEach(function(r){
+    document.querySelectorAll('.mode').forEach(function(el){ el.classList.toggle('on', el.id === 'm' + ui.m); });
+    document.querySelectorAll('.seg button').forEach(function(b){
+      var on = b.dataset.m === ui.m;
+      b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    document.getElementById('sched').textContent = SCHED[ui.m];
+    var w = wk();
+    lab.textContent = 'Седмица ' + w;
+    var cur = W()[w] || {}, prv = W()[w - 1] || {};
+    R[ui.m].forEach(function(r){
       var k = r.dataset.k;
-      var inp = r.querySelector('.w input');
-      var pv  = r.querySelector('.w .prev');
-      inp.value = cur[k] || '';
-      pv.textContent = prv[k] ? ('пред. ' + prv[k]) : '';
-      if(data.l[k]){ r.querySelector('a.nm').href = data.l[k]; }
+      r.querySelector('.w input').value = cur[k] || '';
+      r.querySelector('.w .prev').textContent = prv[k] ? ('пред. ' + prv[k]) : '';
+    });
+    R['2'].concat(R['3']).forEach(function(r){
+      var lk = r.dataset.l || r.dataset.k;
+      if(data.l[lk]){ r.querySelector('a.nm').href = data.l[lk]; }
     });
     document.querySelectorAll('[data-lk]').forEach(function(el){
       var a = el.querySelector('a.nm');
       if(a && data.l[el.dataset.lk]){ a.href = data.l[el.dataset.lk]; }
     });
+    if(document.getElementById('pHist').classList.contains('on')) buildHist();
   }
 
-  /* ---------- обща редакция на връзка (важи навсякъде) ---------- */
+  /* ---------- редакция на връзка ---------- */
   function bindLink(key, anchor, btn, er){
     if(!key || !anchor || !btn || !er) return;
     var f = er.querySelector('input'), ok = er.querySelector('button');
     if(!f || !ok) return;
     btn.addEventListener('click', function(e){
       e.preventDefault();
-      var open = er.classList.toggle('on');
-      if(open){ f.value = anchor.href; f.focus(); f.select(); }
+      if(er.classList.toggle('on')){ f.value = anchor.href; f.focus(); f.select(); }
     });
     function apply(){
       var v = f.value.trim();
-      if(v){ data.l[key] = v; anchor.href = v; pushL(); }
+      if(v){ data.l[key] = v; pushL(); render(); }
       er.classList.remove('on');
     }
     ok.addEventListener('click', apply);
     f.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); apply(); } });
   }
 
-  /* ---------- тежести + връзка за редовете от тренировките ---------- */
-  rows.forEach(function(r){
-    var k = r.dataset.k;
-    r.querySelector('.w input').addEventListener('input', function(){
-      if(!data.w[week]) data.w[week] = {};
-      if(this.value) data.w[week][k] = this.value; else delete data.w[week][k];
-      pushW();
+  ['2','3'].forEach(function(m){
+    R[m].forEach(function(r){
+      var k = r.dataset.k;
+      r.querySelector('.w input').addEventListener('input', function(){
+        var w = wk(m), d = W(m);
+        if(!d[w]) d[w] = {};
+        if(this.value) d[w][k] = this.value; else delete d[w][k];
+        pushW(m);
+      });
+      bindLink(r.dataset.l || k, r.querySelector('a.nm'), r.querySelector('.ed'), r.nextElementSibling);
     });
-    bindLink(k, r.querySelector('a.nm'), r.querySelector('.ed'), r.nextElementSibling);
   });
-
-  /* ---------- връзки в разгрявката и дневната секция ---------- */
-  var linkOnly = Array.prototype.slice.call(document.querySelectorAll('[data-lk]'));
-  linkOnly.forEach(function(el){
-    var k  = el.dataset.lk;
+  document.querySelectorAll('[data-lk]').forEach(function(el){
+    var k = el.dataset.lk;
     var er = el.querySelector('.er') || document.querySelector('.er[data-for="' + k + '"]');
     bindLink(k, el.querySelector('a.nm'), el.querySelector('.ed'), er);
   });
 
-  /* ---------- навигация по седмици ---------- */
-  document.getElementById('prev').addEventListener('click', function(){ if(week>1){ week--; render(); } });
-  document.getElementById('next').addEventListener('click', function(){ if(week<52){ week++; render(); } });
-
-  /* ---------- копиране на миналата седмица ---------- */
-  document.getElementById('bCarry').addEventListener('click', function(){
-    var prv = data.w[week-1];
-    if(!prv || !Object.keys(prv).length){
-      this.textContent = 'Няма данни';
-      var b0 = this; setTimeout(function(){ b0.textContent = '\u21A7 Миналата'; }, 1500);
-      return;
-    }
-    if(!data.w[week]) data.w[week] = {};
-    Object.keys(prv).forEach(function(k){
-      if(!data.w[week][k]) data.w[week][k] = prv[k];
+  /* ---------- превключване 2 / 3 дни ---------- */
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(ui.m === b.dataset.m) return;
+      ui.m = b.dataset.m; pushUI(); render();
     });
-    pushW(); render();
-    this.textContent = 'Копирано';
-    var b1 = this; setTimeout(function(){ b1.textContent = '\u21A7 Миналата'; }, 1500);
+  });
+
+  /* ---------- седмици ---------- */
+  document.getElementById('prev').addEventListener('click', function(){
+    if(wk() > 1){ ui['wk' + ui.m]--; pushUI(); render(); }
+  });
+  document.getElementById('next').addEventListener('click', function(){
+    if(wk() < 52){ ui['wk' + ui.m]++; pushUI(); render(); }
+  });
+
+  function flash(btn, txt, back){ btn.textContent = txt; setTimeout(function(){ btn.textContent = back; }, 1500); }
+
+  document.getElementById('bCarry').addEventListener('click', function(){
+    var w = wk(), d = W(), prv = d[w - 1];
+    if(!prv || !Object.keys(prv).length){ flash(this, 'Няма данни', '↧ Миналата'); return; }
+    if(!d[w]) d[w] = {};
+    Object.keys(prv).forEach(function(k){ if(!d[w][k]) d[w][k] = prv[k]; });
+    pushW(ui.m); render();
+    flash(this, 'Копирано', '↧ Миналата');
   });
 
   /* ---------- панели ---------- */
   function toggle(btn, panel, before){
     document.getElementById(btn).addEventListener('click', function(){
-      var p = document.getElementById(panel);
-      var on = p.classList.toggle('on');
-      if(on && before) before();
+      if(document.getElementById(panel).classList.toggle('on') && before) before();
     });
   }
-  toggle('bHist','pHist', buildHist);
-  toggle('bData','pData', function(){
-    document.getElementById('dataBox').value = JSON.stringify({w:data.w, l:data.l});
+  toggle('bHist', 'pHist', buildHist);
+  toggle('bData', 'pData', function(){
+    document.getElementById('dataBox').value = JSON.stringify({ w:data.w2, w3:data.w3, l:data.l });
   });
 
   function buildHist(){
-    var weeks = Object.keys(data.w).filter(function(x){
-      return Object.keys(data.w[x]).length;
-    }).sort(function(a,b){ return a-b; });
+    var d = W();
+    var weeks = Object.keys(d).filter(function(x){ return Object.keys(d[x]).length; }).sort(function(a, b){ return a - b; });
     var host = document.getElementById('histBody');
-    if(!weeks.length){ host.innerHTML = '<p style="color:#767b84">Още няма записани тежести.</p>'; return; }
-    var html = '<table><thead><tr><th>Упражнение</th>';
+    var title = ui.m === '3' ? '3 дни' : '2 дни';
+    if(!weeks.length){ host.innerHTML = '<p style="color:#767b84">Още няма записани тежести (' + title + ').</p>'; return; }
+    var html = '<table><thead><tr><th>' + title + '</th>';
     weeks.forEach(function(w){ html += '<th>с' + w + '</th>'; });
     html += '</tr></thead><tbody>';
-    var seen = {};
-    rows.forEach(function(r){
+    R[ui.m].forEach(function(r){
       var k = r.dataset.k;
-      if(seen[k]) return; seen[k] = 1;
-      var any = weeks.some(function(w){ return data.w[w][k]; });
-      if(!any) return;
-      html += '<tr><td>' + r.querySelector('a.nm').textContent + '</td>';
-      weeks.forEach(function(w){ html += '<td>' + (data.w[w][k] || '·') + '</td>'; });
+      if(!weeks.some(function(w){ return d[w][k]; })) return;
+      var box = r.closest('.card, .fallback'), tag = box ? box.querySelector('.tag').textContent + ' · ' : '';
+      html += '<tr><td>' + tag + r.querySelector('a.nm').textContent + '</td>';
+      weeks.forEach(function(w){ html += '<td>' + (d[w][k] || '·') + '</td>'; });
       html += '</tr>';
     });
     host.innerHTML = html + '</tbody></table>';
@@ -684,31 +539,23 @@
     var box = document.getElementById('dataBox');
     box.select(); box.setSelectionRange(0, 999999);
     try{ navigator.clipboard.writeText(box.value); }catch(e){ try{ document.execCommand('copy'); }catch(e2){} }
-    this.textContent = 'Копирано';
-    var b = this; setTimeout(function(){ b.textContent = 'Копирай'; }, 1500);
+    flash(this, 'Копирано', 'Копирай');
   });
   document.getElementById('bApply').addEventListener('click', function(){
     try{
       var o = JSON.parse(document.getElementById('dataBox').value);
-      if(o.w) data.w = o.w;
-      if(o.l) data.l = o.l;
-      pushW(); pushL(); render();
-      this.textContent = 'Готово';
-      var b = this; setTimeout(function(){ b.textContent = 'Приложи поставеното'; }, 1500);
-    }catch(e){
-      this.textContent = 'Невалиден текст';
-      var b2 = this; setTimeout(function(){ b2.textContent = 'Приложи поставеното'; }, 1800);
-    }
+      if(o.w)  data.w2 = o.w;
+      if(o.w3) data.w3 = o.w3;
+      if(o.l)  data.l  = o.l;
+      pushW('2'); pushW('3'); pushL(); render();
+      flash(this, 'Готово', 'Приложи поставеното');
+    }catch(e){ flash(this, 'Невалиден текст', 'Приложи поставеното'); }
   });
 
   probe();
   var note = document.getElementById('modeNote');
-  if(note){
-    note.textContent = (mode === 'memory')
-      ? ' ⚠ Записът не работи тук — ползвай „Данни" за архив.'
-      : '';
-    if(mode === 'memory') note.style.color = '#c8102e';
-  }
+  if(note && sm === 'memory'){ note.textContent = ' ⚠ Записът не работи тук — ползвай „Данни" за архив.'; note.style.color = '#c8102e'; }
   pull().then(render).catch(render);
 })();
+
 </script>
