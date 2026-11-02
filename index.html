@@ -405,6 +405,20 @@
     data.l  = (await readKey(K.l))  || {};
     var u = await readKey(K.ui);
     if(u){ ui.m = (u.m === '3') ? '3' : '2'; ui.wk2 = +u.wk2 || 1; ui.wk3 = +u.wk3 || 1; }
+    else { ui.wk2 = lastWeek(data.w2); ui.wk3 = lastWeek(data.w3); }
+  }
+  function lastWeek(d){
+    var ks = Object.keys(d).filter(function(x){ return d[x] && Object.keys(d[x]).length; }).map(Number);
+    return ks.length ? Math.max.apply(null, ks) : 1;
+  }
+  /* последната стойност от режим 2 дни за същото упражнение (по общия ключ на видеото) */
+  var MAP2 = {};
+  R['2'].forEach(function(r){ var lk = r.dataset.l || r.dataset.k; if(!MAP2[lk]) MAP2[lk] = r.dataset.k; });
+  function from2(lk){
+    var k = MAP2[lk] || lk, d = data.w2;
+    var ks = Object.keys(d).map(Number).sort(function(a, b){ return b - a; });
+    for(var i = 0; i < ks.length; i++){ var v = d[ks[i]] && d[ks[i]][k]; if(v) return v; }
+    return '';
   }
   var tw = {};
   function pushW(m){
@@ -428,7 +442,9 @@
     R[ui.m].forEach(function(r){
       var k = r.dataset.k;
       r.querySelector('.w input').value = cur[k] || '';
-      r.querySelector('.w .prev').textContent = prv[k] ? ('пред. ' + prv[k]) : '';
+      var p = prv[k] ? ('пред. ' + prv[k]) : '';
+      if(!p && ui.m === '3' && r.dataset.l){ var v2 = from2(r.dataset.l); if(v2) p = '2 дни: ' + v2; }
+      r.querySelector('.w .prev').textContent = p;
     });
     R['2'].concat(R['3']).forEach(function(r){
       var lk = r.dataset.l || r.dataset.k;
@@ -532,6 +548,21 @@
       weeks.forEach(function(w){ html += '<td>' + (d[w][k] || '·') + '</td>'; });
       html += '</tr>';
     });
+    var known = {}; R[ui.m].forEach(function(r){ known[r.dataset.k] = 1; });
+    var OLD = { a1c:'Прасец, прав крак (в почивките)', b3:'Пуловер / едностр. лат', b4a:'Face pull',
+      b5a:'Глутеус мост / hip thrust', b5k:'Кикбек на кабел', p3:'Наклонена преса (Т1)', p4:'Face pull',
+      p6:'Пуловер', q1c:'Прасец, прав крак', q6k:'Кикбек на кабел', r1c:'Странични, леко', r1p:'Pallof press',
+      r6:'Глутеус мост', r7:'Suitcase carry' };
+    var extra = [];
+    weeks.forEach(function(w){ Object.keys(d[w]).forEach(function(k){ if(!known[k] && extra.indexOf(k) < 0) extra.push(k); }); });
+    if(extra.length){
+      html += '<tr><th colspan="' + (weeks.length + 1) + '" style="text-align:left">Стари упражнения</th></tr>';
+      extra.forEach(function(k){
+        html += '<tr><td>' + (OLD[k] || k) + '</td>';
+        weeks.forEach(function(w){ html += '<td>' + (d[w][k] || '·') + '</td>'; });
+        html += '</tr>';
+      });
+    }
     host.innerHTML = html + '</tbody></table>';
   }
 
